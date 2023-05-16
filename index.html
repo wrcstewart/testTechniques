@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Test Techniques</title>
+</head>
+
+// first part of program to test what happens when one div overlays another. It shows clicks only fired
+// by the top layer.
+// try out some clicking and hiding combinations
+<body>
+<div id="div1" onclick="clickDiv1()"></div>
+<div id="div2" onclick="clickDiv2()"></div>
+<div id="div3"></div>
+<button id="but1" onclick="clickBut1()">click</button>
+</body>
+
+
+<script>
+    function styleEl(elId,l,w,t,h,bkCol){
+  let el = document.getElementById(elId);
+  el.style.position = "fixed";
+  el.style.left = l+"px";
+  el.style.width = w+"px";
+  el.style.top = t+"px";
+  el.style.height = h+"px";
+  el.style.backgroundColor = bkCol;
+}
+
+function clickBut1(){
+
+    elDiv3.innerHTML = "<b>clicked</b>";
+}
+
+function clickDiv1(){
+
+        alert("clicked");
+
+    elDiv3.innerText = "******clicked Div 1*****!!!!!!!!!!!!!!!!";
+    elDiv2.hidden = false;
+}
+function clickDiv2(){
+
+        //alert("clicked2");
+
+    elDiv3.innerText = "clicked Div 2*****";
+}
+
+let elDiv1 = document.getElementById("div1");
+let elDiv2 = document.getElementById("div2");
+let elDiv3 = document.getElementById("div3");
+let elBut1 = document.getElementById("but1");
+
+styleEl("div1",0,300,0,400,"blue");
+styleEl("div2",0,300,0,400,"yellow");
+styleEl("div3",0,300,450,100,"red");
+styleEl("but1",0,40,410,30,"green");
+
+elDiv2.hidden = true;
+</script>
+</html>
