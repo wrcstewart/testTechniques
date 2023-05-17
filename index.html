@@ -61,13 +61,14 @@ styleEl("div3",0,300,450,100,"red");
 styleEl("but1",0,40,410,30,"green");
     elDiv2.hidden = true;
     //----------------------------------------------------------------
-    //test out use of custom html tag - basic - not with proper js and html 5.1 possibilities.
+    // second part of file:test out use of custom html tag - basic - not with proper js and html 5.1 possibilities.
+    // some string handling to process the tagged part.
 
     let testString = '???start<v-auth>ouranos_1</v-auth>end***';
 
     function removeTag(aText,aTag){
         // return the text or html in between the <tag> and </tag> as .content and the .editedString
-        // as top line a creation message then rest without tags and name.
+        // as a top line a creation message followed by rest of message without tags and name.
         let positionStartTag = aText.search(aTag);
         if (positionStartTag === -1)  return null;
         let positionStartContent = positionStartTag+aTag.length;
