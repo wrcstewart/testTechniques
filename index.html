@@ -5,14 +5,17 @@
     <title>Test Techniques</title>
 </head>
 
-// first part of program to test what happens when one div overlays another. It shows clicks only fired
-// by the top layer.
-// try out some clicking and hiding combinations
+<!--
+first part of program to test what happens when one div overlays another. It shows clicks only fired
+by the top layer.
+try out some clicking and hiding combinations
+-->
 <body>
 <div id="div1" onclick="clickDiv1()"></div>
 <div id="div2" onclick="clickDiv2()"></div>
 <div id="div3"></div>
 <button id="but1" onclick="clickBut1()">click</button>
+<dialog id="dialog1">dialog box</dialog>
 </body>
 
 
@@ -46,16 +49,56 @@ function clickDiv2(){
     elDiv3.innerText = "clicked Div 2*****";
 }
 
-let elDiv1 = document.getElementById("div1");
+//let elDiv1 = document.getElementById("div1");
 let elDiv2 = document.getElementById("div2");
 let elDiv3 = document.getElementById("div3");
-let elBut1 = document.getElementById("but1");
+//let elBut1 = document.getElementById("but1");
+    let elDialog1 = document.getElementById("dialog1");
 
 styleEl("div1",0,300,0,400,"blue");
 styleEl("div2",0,300,0,400,"yellow");
 styleEl("div3",0,300,450,100,"red");
 styleEl("but1",0,40,410,30,"green");
+    elDiv2.hidden = true;
+    //----------------------------------------------------------------
+    //test out use of custom html tag - basic - not with proper js and html 5.1 possibilities.
 
-elDiv2.hidden = true;
+    let testString = '???start<v-auth>ouranos_1</v-auth>end***';
+
+    function removeTag(aText,aTag){
+        // return the text or html in between the <tag> and </tag> as .content and the .editedString
+        // as top line a creation message then rest without tags and name.
+        let positionStartTag = aText.search(aTag);
+        if (positionStartTag === -1)  return null;
+        let positionStartContent = positionStartTag+aTag.length;
+        let endTagString = "</"+ aTag.substring(1);
+        let positionEndTag = aText.search(endTagString);
+        if (positionEndTag === -1)  return null;
+        //now return the string of content.
+        let content = aText.substring(positionStartContent,positionEndTag);
+        let contentPlusTags= aTag+content+endTagString;
+        let editedStringBody= aText.replace(contentPlusTags,'')
+        let editedStringHeader = "***"+content +":was created***";
+        let editedString = editedStringHeader+"<br>"+editedStringBody;
+        return({content:content,editedString:editedString});
+    }
+
+
+
+    //elDiv3.innerText = removeTag(testString,'<v-auth>');
+    elDiv3.innerHTML = removeTag(testString,'<v-auth>').editedString;
+
+// below is not in use
+    //let newVAuthorRaw =prompt("Please enter your new author name here. Do not enter any number");
+    // check instantiation number and add with tag
+    // say in text create or clone a 'name'
+    //then add to text stream with tag.
+    //when cloning do not clone the tag and content.
+
+
+
+
+
+
 </script>
 </html>
